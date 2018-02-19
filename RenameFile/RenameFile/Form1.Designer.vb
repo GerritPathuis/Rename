@@ -24,19 +24,18 @@ Partial Class Form1
     Private Sub InitializeComponent()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
+        Me.ProgressBar1 = New System.Windows.Forms.ProgressBar()
+        Me.TextBox7 = New System.Windows.Forms.TextBox()
+        Me.TextBox1 = New System.Windows.Forms.TextBox()
+        Me.Button2 = New System.Windows.Forms.Button()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
         Me.DataGridView1 = New System.Windows.Forms.DataGridView()
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
-        Me.Button2 = New System.Windows.Forms.Button()
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
-        Me.TextBox7 = New System.Windows.Forms.TextBox()
-        Me.DataGridView2 = New System.Windows.Forms.DataGridView()
-        Me.ProgressBar1 = New System.Windows.Forms.ProgressBar()
+        Me.Button1 = New System.Windows.Forms.Button()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         Me.TabPage2.SuspendLayout()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.DataGridView2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'TabControl1
@@ -47,11 +46,12 @@ Partial Class Form1
         Me.TabControl1.Location = New System.Drawing.Point(0, 0)
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.SelectedIndex = 0
-        Me.TabControl1.Size = New System.Drawing.Size(386, 380)
+        Me.TabControl1.Size = New System.Drawing.Size(672, 380)
         Me.TabControl1.TabIndex = 0
         '
         'TabPage1
         '
+        Me.TabPage1.Controls.Add(Me.Button1)
         Me.TabPage1.Controls.Add(Me.ProgressBar1)
         Me.TabPage1.Controls.Add(Me.TextBox7)
         Me.TabPage1.Controls.Add(Me.TextBox1)
@@ -59,52 +59,17 @@ Partial Class Form1
         Me.TabPage1.Location = New System.Drawing.Point(4, 22)
         Me.TabPage1.Name = "TabPage1"
         Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage1.Size = New System.Drawing.Size(378, 354)
+        Me.TabPage1.Size = New System.Drawing.Size(664, 354)
         Me.TabPage1.TabIndex = 0
         Me.TabPage1.Text = "TabPage1"
         Me.TabPage1.UseVisualStyleBackColor = True
         '
-        'TabPage2
+        'ProgressBar1
         '
-        Me.TabPage2.Controls.Add(Me.DataGridView2)
-        Me.TabPage2.Controls.Add(Me.DataGridView1)
-        Me.TabPage2.Location = New System.Drawing.Point(4, 22)
-        Me.TabPage2.Name = "TabPage2"
-        Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage2.Size = New System.Drawing.Size(378, 354)
-        Me.TabPage2.TabIndex = 1
-        Me.TabPage2.Text = "Datagrid"
-        Me.TabPage2.UseVisualStyleBackColor = True
-        '
-        'DataGridView1
-        '
-        Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridView1.Location = New System.Drawing.Point(6, 6)
-        Me.DataGridView1.Name = "DataGridView1"
-        Me.DataGridView1.Size = New System.Drawing.Size(364, 121)
-        Me.DataGridView1.TabIndex = 0
-        '
-        'OpenFileDialog1
-        '
-        Me.OpenFileDialog1.FileName = "OpenFileDialog1"
-        '
-        'Button2
-        '
-        Me.Button2.Location = New System.Drawing.Point(8, 6)
-        Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(162, 32)
-        Me.Button2.TabIndex = 3
-        Me.Button2.Text = "Select source file "
-        Me.Button2.UseVisualStyleBackColor = True
-        '
-        'TextBox1
-        '
-        Me.TextBox1.Enabled = False
-        Me.TextBox1.Location = New System.Drawing.Point(8, 44)
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(362, 20)
-        Me.TextBox1.TabIndex = 4
-        Me.TextBox1.Text = "table.txt"
+        Me.ProgressBar1.Location = New System.Drawing.Point(8, 226)
+        Me.ProgressBar1.Name = "ProgressBar1"
+        Me.ProgressBar1.Size = New System.Drawing.Size(362, 23)
+        Me.ProgressBar1.TabIndex = 17
         '
         'TextBox7
         '
@@ -115,35 +80,70 @@ Partial Class Form1
         Me.TextBox7.Size = New System.Drawing.Size(362, 110)
         Me.TextBox7.TabIndex = 16
         '
-        'DataGridView2
+        'TextBox1
         '
-        Me.DataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridView2.Location = New System.Drawing.Point(6, 143)
-        Me.DataGridView2.Name = "DataGridView2"
-        Me.DataGridView2.Size = New System.Drawing.Size(364, 121)
-        Me.DataGridView2.TabIndex = 1
+        Me.TextBox1.Enabled = False
+        Me.TextBox1.Location = New System.Drawing.Point(8, 44)
+        Me.TextBox1.Name = "TextBox1"
+        Me.TextBox1.Size = New System.Drawing.Size(362, 20)
+        Me.TextBox1.TabIndex = 4
+        Me.TextBox1.Text = "c:\temp\Tekeningnummers.xlsx"
         '
-        'ProgressBar1
+        'Button2
         '
-        Me.ProgressBar1.Location = New System.Drawing.Point(8, 226)
-        Me.ProgressBar1.Name = "ProgressBar1"
-        Me.ProgressBar1.Size = New System.Drawing.Size(362, 23)
-        Me.ProgressBar1.TabIndex = 17
+        Me.Button2.Location = New System.Drawing.Point(8, 6)
+        Me.Button2.Name = "Button2"
+        Me.Button2.Size = New System.Drawing.Size(130, 32)
+        Me.Button2.TabIndex = 3
+        Me.Button2.Text = "Select source file "
+        Me.Button2.UseVisualStyleBackColor = True
+        '
+        'TabPage2
+        '
+        Me.TabPage2.Controls.Add(Me.DataGridView1)
+        Me.TabPage2.Location = New System.Drawing.Point(4, 22)
+        Me.TabPage2.Name = "TabPage2"
+        Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
+        Me.TabPage2.Size = New System.Drawing.Size(664, 354)
+        Me.TabPage2.TabIndex = 1
+        Me.TabPage2.Text = "Datagrid"
+        Me.TabPage2.UseVisualStyleBackColor = True
+        '
+        'DataGridView1
+        '
+        Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.DataGridView1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.DataGridView1.Location = New System.Drawing.Point(3, 3)
+        Me.DataGridView1.Name = "DataGridView1"
+        Me.DataGridView1.Size = New System.Drawing.Size(658, 348)
+        Me.DataGridView1.TabIndex = 0
+        '
+        'OpenFileDialog1
+        '
+        Me.OpenFileDialog1.FileName = "OpenFileDialog1"
+        '
+        'Button1
+        '
+        Me.Button1.Location = New System.Drawing.Point(168, 6)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(130, 32)
+        Me.Button1.TabIndex = 18
+        Me.Button1.Text = "Read excel File"
+        Me.Button1.UseVisualStyleBackColor = True
         '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(386, 380)
+        Me.ClientSize = New System.Drawing.Size(672, 380)
         Me.Controls.Add(Me.TabControl1)
         Me.Name = "Form1"
-        Me.Text = "Renake files"
+        Me.Text = "Rename files"
         Me.TabControl1.ResumeLayout(False)
         Me.TabPage1.ResumeLayout(False)
         Me.TabPage1.PerformLayout()
         Me.TabPage2.ResumeLayout(False)
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.DataGridView2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -157,5 +157,5 @@ Partial Class Form1
     Friend WithEvents Button2 As Button
     Friend WithEvents OpenFileDialog1 As OpenFileDialog
     Friend WithEvents ProgressBar1 As ProgressBar
-    Friend WithEvents DataGridView2 As DataGridView
+    Friend WithEvents Button1 As Button
 End Class

@@ -1,10 +1,12 @@
 ﻿Imports System.IO
 Imports System.Text
 Imports System.Text.RegularExpressions
+Imports Excel = Microsoft.Office.Interop.Excel
 
 Public Class Form1
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
+        DataGridView1.ColumnCount = 4
+        DataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnMode.AllCells
     End Sub
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
@@ -16,17 +18,55 @@ Public Class Form1
 
         TextBox1.Text = OpenFileDialog1.FileName
         TextBox7.Clear()
-
         '==============  Read from file into the dataview grid ==============
-        Read_from_file()
+        'Read_from_file()
+        Read_excel()
+    End Sub
+
+    Private Sub Read_excel()
+        Dim xlApp As Excel.Application
+        Dim xlWorkBook As Excel.Workbook
+        Dim xlWorkSheet As Excel.Worksheet
+
+        If File.Exists(TextBox1.Text) = True Then
+            Try
+                xlApp = New Excel.ApplicationClass
+                xlWorkBook = xlApp.Workbooks.Open(TextBox1.Text)
+                xlWorkSheet = xlWorkBook.Worksheets("Referenties")
+
+                'Read the excel file
+                ProgressBar1.Visible = True
+                For row = 1 To 100
+                    ProgressBar1.Value = 100 - row
+
+                    'DataGridView1.Rows.Item(row).Cells(1).Value = xlWorkSheet.Cells(row, 2).ToString
+                    DataGridView1.Rows.Add(New String() {xlWorkSheet.Cells(row, 1).value, xlWorkSheet.Cells(row, 2).value, xlWorkSheet.Cells(row, 3).value, xlWorkSheet.Cells(row, 4).value})
+                Next
+                ProgressBar1.Visible = False
+
+                'MsgBox(xlWorkSheet.Cells(2, 2).value)
+                'edit the cell with new value
+
+                ' xlWorkSheet.Cells(2, 2) = "http://vb.net-informations.com"
+                xlWorkBook.Close()
+                xlApp.Quit()
+
+                ReleaseObject(xlApp)
+                ReleaseObject(xlWorkBook)
+                ReleaseObject(xlWorkSheet)
+            Catch ex As Exception
+                MessageBox.Show(ex.Message)
+                '---------------- now convert-----------------
+            End Try
+        Else
+            MessageBox.Show("Tough shit, file does not exist ..")
+        End If
     End Sub
 
     Private Sub Read_from_file()
         Dim coll, row_no As Integer
 
         DataGridView1.Rows.Clear()
-        DataGridView2.Rows.Clear()
-
         If File.Exists(TextBox1.Text) = True Then
             Try
                 ProgressBar1.Value = 100
@@ -62,5 +102,18 @@ Public Class Form1
         End If
     End Sub
 
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        Read_excel()
+    End Sub
 
+    Private Sub ReleaseObject(ByVal obj As Object)
+        Try
+            System.Runtime.InteropServices.Marshal.ReleaseComObject(obj)
+            obj = Nothing
+        Catch ex As Exception
+            obj = Nothing
+        Finally
+            GC.Collect()
+        End Try
+    End Sub
 End Class
