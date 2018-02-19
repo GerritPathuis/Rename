@@ -62,46 +62,6 @@ Public Class Form1
             MessageBox.Show("Tough shit, file does not exist ..")
         End If
     End Sub
-
-    Private Sub Read_from_file()
-        Dim coll, row_no As Integer
-
-        DataGridView1.Rows.Clear()
-        If File.Exists(TextBox1.Text) = True Then
-            Try
-                ProgressBar1.Value = 100
-                row_no = -1
-                For Each row As String In File.ReadAllLines(TextBox1.Text)
-                    '-----------------------------------------------------
-                    If ProgressBar1.Value > ProgressBar1.Minimum Then
-                        ProgressBar1.Value -= 1
-                    Else
-                        ProgressBar1.Value = ProgressBar1.Maximum
-                    End If
-                    '-----------------------------------------------------
-
-                    TextBox7.AppendText(row.ToString)
-
-                    DataGridView1.Rows.Add()
-                    row_no += 1
-                    coll = 0
-                    For Each column As String In row.Split(New String() {";"}, StringSplitOptions.None)
-                        DataGridView1.Rows.Item(row_no).Cells(coll).Value = column.ToString
-                        coll += 1
-                    Next
-                Next
-            Catch ex As Exception
-                MessageBox.Show(ex.Message)
-                '---------------- now convert-----------------
-            End Try
-
-            TabControl1.SelectedIndex = 1
-            TextBox7.Clear()
-        Else
-            MessageBox.Show("Tough shit, file does not exist ..")
-        End If
-    End Sub
-
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         Read_excel()
     End Sub
@@ -115,5 +75,35 @@ Public Class Form1
         Finally
             GC.Collect()
         End Try
+    End Sub
+
+    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
+        Check_file_exist()
+    End Sub
+    Private Sub Check_file_exist()
+        ProgressBar1.Visible = True
+        For row = 1 To 100
+            ProgressBar1.Value = 100 - row
+            If File.Exists(DataGridView1.Rows.Item(row).Cells(0).Value) Then
+                DataGridView1.Rows.Item(row).Cells(0).Style.BackColor = Color.Green
+            Else
+                DataGridView1.Rows.Item(row).Cells(0).Style.BackColor = Color.Red
+            End If
+        Next
+        ProgressBar1.Visible = False
+    End Sub
+
+    Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
+        Rename_files()
+    End Sub
+    Private Sub Rename_files()
+        ProgressBar1.Visible = True
+        For row = 1 To 100
+            ProgressBar1.Value = 100 - row
+            If File.Exists(DataGridView1.Rows.Item(row).Cells(0).Value) Then
+                My.Computer.FileSystem.RenameFile(DataGridView1.Rows.Item(row).Cells(0).Value, DataGridView1.Rows.Item(row).Cells(3).Value)
+            End If
+        Next
+        ProgressBar1.Visible = False
     End Sub
 End Class

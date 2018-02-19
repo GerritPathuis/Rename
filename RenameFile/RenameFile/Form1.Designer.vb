@@ -24,6 +24,7 @@ Partial Class Form1
     Private Sub InitializeComponent()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
+        Me.Button1 = New System.Windows.Forms.Button()
         Me.ProgressBar1 = New System.Windows.Forms.ProgressBar()
         Me.TextBox7 = New System.Windows.Forms.TextBox()
         Me.TextBox1 = New System.Windows.Forms.TextBox()
@@ -31,7 +32,8 @@ Partial Class Form1
         Me.TabPage2 = New System.Windows.Forms.TabPage()
         Me.DataGridView1 = New System.Windows.Forms.DataGridView()
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
-        Me.Button1 = New System.Windows.Forms.Button()
+        Me.Button3 = New System.Windows.Forms.Button()
+        Me.Button4 = New System.Windows.Forms.Button()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         Me.TabPage2.SuspendLayout()
@@ -51,6 +53,8 @@ Partial Class Form1
         '
         'TabPage1
         '
+        Me.TabPage1.Controls.Add(Me.Button4)
+        Me.TabPage1.Controls.Add(Me.Button3)
         Me.TabPage1.Controls.Add(Me.Button1)
         Me.TabPage1.Controls.Add(Me.ProgressBar1)
         Me.TabPage1.Controls.Add(Me.TextBox7)
@@ -64,20 +68,29 @@ Partial Class Form1
         Me.TabPage1.Text = "TabPage1"
         Me.TabPage1.UseVisualStyleBackColor = True
         '
+        'Button1
+        '
+        Me.Button1.Location = New System.Drawing.Point(8, 70)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(130, 32)
+        Me.Button1.TabIndex = 18
+        Me.Button1.Text = "Read excel File"
+        Me.Button1.UseVisualStyleBackColor = True
+        '
         'ProgressBar1
         '
-        Me.ProgressBar1.Location = New System.Drawing.Point(8, 226)
+        Me.ProgressBar1.Location = New System.Drawing.Point(8, 296)
         Me.ProgressBar1.Name = "ProgressBar1"
         Me.ProgressBar1.Size = New System.Drawing.Size(362, 23)
         Me.ProgressBar1.TabIndex = 17
         '
         'TextBox7
         '
-        Me.TextBox7.Location = New System.Drawing.Point(8, 89)
+        Me.TextBox7.Location = New System.Drawing.Point(8, 218)
         Me.TextBox7.Multiline = True
         Me.TextBox7.Name = "TextBox7"
         Me.TextBox7.ScrollBars = System.Windows.Forms.ScrollBars.Both
-        Me.TextBox7.Size = New System.Drawing.Size(362, 110)
+        Me.TextBox7.Size = New System.Drawing.Size(362, 72)
         Me.TextBox7.TabIndex = 16
         '
         'TextBox1
@@ -122,14 +135,23 @@ Partial Class Form1
         '
         Me.OpenFileDialog1.FileName = "OpenFileDialog1"
         '
-        'Button1
+        'Button3
         '
-        Me.Button1.Location = New System.Drawing.Point(168, 6)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(130, 32)
-        Me.Button1.TabIndex = 18
-        Me.Button1.Text = "Read excel File"
-        Me.Button1.UseVisualStyleBackColor = True
+        Me.Button3.Location = New System.Drawing.Point(8, 108)
+        Me.Button3.Name = "Button3"
+        Me.Button3.Size = New System.Drawing.Size(130, 34)
+        Me.Button3.TabIndex = 19
+        Me.Button3.Text = "Check File exist"
+        Me.Button3.UseVisualStyleBackColor = True
+        '
+        'Button4
+        '
+        Me.Button4.Location = New System.Drawing.Point(8, 148)
+        Me.Button4.Name = "Button4"
+        Me.Button4.Size = New System.Drawing.Size(130, 34)
+        Me.Button4.TabIndex = 20
+        Me.Button4.Text = "Rename File"
+        Me.Button4.UseVisualStyleBackColor = True
         '
         'Form1
         '
@@ -158,4 +180,6 @@ Partial Class Form1
     Friend WithEvents OpenFileDialog1 As OpenFileDialog
     Friend WithEvents ProgressBar1 As ProgressBar
     Friend WithEvents Button1 As Button
+    Friend WithEvents Button3 As Button
+    Friend WithEvents Button4 As Button
 End Class
