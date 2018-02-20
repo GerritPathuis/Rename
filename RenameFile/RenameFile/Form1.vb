@@ -50,7 +50,7 @@ Public Class Form1
                 'edit the cell with new value
 
                 ' xlWorkSheet.Cells(2, 2) = "http://vb.net-informations.com"
-                xlWorkBook.Close()
+                xlWorkBook.Close()  'Er zijn toch geen wijzigingen
                 xlApp.Quit()
 
                 ReleaseObject(xlApp)
@@ -99,11 +99,17 @@ Public Class Form1
         Rename_files()
     End Sub
     Private Sub Rename_files()
+        Dim exist_name, new_name As String
+
         ProgressBar1.Visible = True
         For row = 1 To 100
             ProgressBar1.Value = 100 - row
-            If File.Exists(DataGridView1.Rows.Item(row).Cells(0).Value) Then
-                My.Computer.FileSystem.RenameFile(DataGridView1.Rows.Item(row).Cells(0).Value, DataGridView1.Rows.Item(row).Cells(3).Value)
+
+            exist_name = TextBox2.Text & "\" & DataGridView1.Rows.Item(row).Cells(0).Value & ".idw"
+            new_name = TextBox2.Text & "\" & DataGridView1.Rows.Item(row).Cells(3).Value & ".idw"
+
+            If File.Exists(exist_name) Then
+                My.Computer.FileSystem.RenameFile(exist_name, new_name)
             End If
         Next
         ProgressBar1.Visible = False
