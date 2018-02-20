@@ -36,12 +36,12 @@ Public Class Form1
                 xlWorkBook = xlApp.Workbooks.Open(TextBox1.Text)
                 xlWorkSheet = xlWorkBook.Worksheets("Referenties")
 
+                xlApp.DisplayAlerts = False 'Suppress excel messages
+
                 'Read the excel file
                 ProgressBar1.Visible = True
                 For row = 1 To 100
                     ProgressBar1.Value = 100 - row
-
-                    'DataGridView1.Rows.Item(row).Cells(1).Value = xlWorkSheet.Cells(row, 2).ToString
                     DataGridView1.Rows.Add(New String() {xlWorkSheet.Cells(row, 1).value, xlWorkSheet.Cells(row, 2).value, xlWorkSheet.Cells(row, 3).value, xlWorkSheet.Cells(row, 4).value})
                 Next
                 ProgressBar1.Visible = False
@@ -83,10 +83,16 @@ Public Class Form1
         Check_file_exist()
     End Sub
     Private Sub Check_file_exist()
+        Dim exist_name As String
+
         ProgressBar1.Visible = True
+        Refresh()
+
         For row = 1 To 100
             ProgressBar1.Value = 100 - row
-            If File.Exists(DataGridView1.Rows.Item(row).Cells(0).Value) Then
+
+            exist_name = TextBox2.Text & "\" & DataGridView1.Rows.Item(row).Cells(0).Value & ".idw"
+            If File.Exists(exist_name) Then
                 DataGridView1.Rows.Item(row).Cells(0).Style.BackColor = Color.Green
             Else
                 DataGridView1.Rows.Item(row).Cells(0).Style.BackColor = Color.Red
@@ -102,6 +108,8 @@ Public Class Form1
         Dim exist_name, new_name As String
 
         ProgressBar1.Visible = True
+        Refresh()
+
         For row = 1 To 100
             ProgressBar1.Value = 100 - row
 
