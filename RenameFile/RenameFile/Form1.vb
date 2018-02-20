@@ -17,6 +17,8 @@ Public Class Form1
         OpenFileDialog1.ShowDialog()
 
         TextBox1.Text = OpenFileDialog1.FileName
+        TextBox2.Text = Path.GetDirectoryName(TextBox1.Text)
+
         TextBox7.Clear()
         '==============  Read from file into the dataview grid ==============
         'Read_from_file()
