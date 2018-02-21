@@ -22,6 +22,7 @@ Public Class Form1
         TextBox2.Text = Path.GetDirectoryName(TextBox1.Text)
 
         '==============  Read from file into the dataview grid ==============
+        Label5.Visible = False
         Read_excel()
     End Sub
 
@@ -44,6 +45,9 @@ Public Class Form1
                 ProgressBar1.Maximum = _no_rowws
                 ProgressBar1.Value = _no_rowws
                 ProgressBar1.Visible = True
+                Me.Refresh()
+
+                DataGridView1.Rows.Clear()  'Make sure the grid is empty
 
                 For row = 1 To _no_rowws
                     ProgressBar1.Value = _no_rowws - row
@@ -94,7 +98,7 @@ Public Class Form1
 
         ProgressBar1.Value = _no_rowws
         ProgressBar1.Visible = True
-        Refresh()
+        Me.Refresh()
 
         For row = 1 To _no_rowws - 1
             ProgressBar1.Value = _no_rowws - row
@@ -135,7 +139,8 @@ Public Class Form1
 
         ProgressBar1.Value = _no_rowws
         ProgressBar1.Visible = True
-        Refresh()
+        Me.Refresh()
+        Application.DoEvents()
 
         Try
             For row = 1 To _no_rowws
@@ -159,6 +164,11 @@ Public Class Form1
         Catch ex As Exception
             MessageBox.Show("Renaming section" & ex.Message)
         End Try
-        Label5.Text = succes_counter.ToString & " IDW's are renamed"
+        Label5.Visible = True
+        If (succes_counter > 0) Then
+            Label5.Text = succes_counter.ToString & " IDW files are renamed"
+        Else
+            Label5.Text = "None IDW files are renamed"
+        End If
     End Sub
 End Class

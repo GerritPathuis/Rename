@@ -24,6 +24,9 @@ Partial Class Form1
     Private Sub InitializeComponent()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.Label3 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.TextBox2 = New System.Windows.Forms.TextBox()
@@ -36,9 +39,6 @@ Partial Class Form1
         Me.TabPage2 = New System.Windows.Forms.TabPage()
         Me.DataGridView1 = New System.Windows.Forms.DataGridView()
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
-        Me.Label3 = New System.Windows.Forms.Label()
-        Me.Label4 = New System.Windows.Forms.Label()
-        Me.Label5 = New System.Windows.Forms.Label()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         Me.TabPage2.SuspendLayout()
@@ -78,6 +78,38 @@ Partial Class Form1
         Me.TabPage1.Text = "File info en inlezen"
         Me.TabPage1.UseVisualStyleBackColor = True
         '
+        'Label5
+        '
+        Me.Label5.AutoSize = True
+        Me.Label5.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label5.Location = New System.Drawing.Point(10, 299)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(203, 15)
+        Me.Label5.TabIndex = 26
+        Me.Label5.Text = "None IDW's Files are renamed"
+        '
+        'Label4
+        '
+        Me.Label4.AutoSize = True
+        Me.Label4.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label4.Location = New System.Drawing.Point(9, 212)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(150, 15)
+        Me.Label4.TabIndex = 25
+        Me.Label4.Text = "New IDW already exist"
+        Me.Label4.Visible = False
+        '
+        'Label3
+        '
+        Me.Label3.AutoSize = True
+        Me.Label3.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label3.Location = New System.Drawing.Point(9, 190)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(123, 15)
+        Me.Label3.TabIndex = 24
+        Me.Label3.Text = "Old IDW not found"
+        Me.Label3.Visible = False
+        '
         'Label2
         '
         Me.Label2.AutoSize = True
@@ -107,11 +139,11 @@ Partial Class Form1
         '
         'Button4
         '
-        Me.Button4.Location = New System.Drawing.Point(8, 252)
+        Me.Button4.Location = New System.Drawing.Point(8, 244)
         Me.Button4.Name = "Button4"
         Me.Button4.Size = New System.Drawing.Size(362, 34)
         Me.Button4.TabIndex = 20
-        Me.Button4.Text = "4) Rename File"
+        Me.Button4.Text = "4) Rename IDW Files"
         Me.Button4.UseVisualStyleBackColor = True
         '
         'Button3
@@ -120,7 +152,7 @@ Partial Class Form1
         Me.Button3.Name = "Button3"
         Me.Button3.Size = New System.Drawing.Size(362, 34)
         Me.Button3.TabIndex = 19
-        Me.Button3.Text = "3) Check File exist"
+        Me.Button3.Text = "3) Check IDW File exist"
         Me.Button3.UseVisualStyleBackColor = True
         '
         'Button1
@@ -129,7 +161,7 @@ Partial Class Form1
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(362, 32)
         Me.Button1.TabIndex = 18
-        Me.Button1.Text = "2) Read excel File"
+        Me.Button1.Text = "2) Read Excel File"
         Me.Button1.UseVisualStyleBackColor = True
         '
         'ProgressBar1
@@ -155,7 +187,7 @@ Partial Class Form1
         Me.Button2.Name = "Button2"
         Me.Button2.Size = New System.Drawing.Size(362, 32)
         Me.Button2.TabIndex = 3
-        Me.Button2.Text = "1) Select naam conversie excel file "
+        Me.Button2.Text = "1) Select EXCEL conversie file "
         Me.Button2.UseVisualStyleBackColor = True
         '
         'TabPage2
@@ -182,39 +214,6 @@ Partial Class Form1
         '
         Me.OpenFileDialog1.FileName = "OpenFileDialog1"
         '
-        'Label3
-        '
-        Me.Label3.AutoSize = True
-        Me.Label3.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label3.Location = New System.Drawing.Point(9, 190)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(123, 15)
-        Me.Label3.TabIndex = 24
-        Me.Label3.Text = "Old IDW not found"
-        Me.Label3.Visible = False
-        '
-        'Label4
-        '
-        Me.Label4.AutoSize = True
-        Me.Label4.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label4.Location = New System.Drawing.Point(9, 212)
-        Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(150, 15)
-        Me.Label4.TabIndex = 25
-        Me.Label4.Text = "New IDW already exist"
-        Me.Label4.Visible = False
-        '
-        'Label5
-        '
-        Me.Label5.AutoSize = True
-        Me.Label5.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label5.Location = New System.Drawing.Point(9, 303)
-        Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(134, 15)
-        Me.Label5.TabIndex = 26
-        Me.Label5.Text = " IDW's are renamed"
-        Me.Label5.Visible = False
-        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -222,7 +221,7 @@ Partial Class Form1
         Me.ClientSize = New System.Drawing.Size(672, 406)
         Me.Controls.Add(Me.TabControl1)
         Me.Name = "Form1"
-        Me.Text = "Rename files"
+        Me.Text = "Rename Inventor IDW files"
         Me.TabControl1.ResumeLayout(False)
         Me.TabPage1.ResumeLayout(False)
         Me.TabPage1.PerformLayout()
