@@ -9,6 +9,8 @@ Public Class Form1
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         DataGridView1.ColumnCount = 4
         DataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnMode.AllCells
+        Label5.Text = ""
+        Label6.Text = ""
     End Sub
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
@@ -22,8 +24,10 @@ Public Class Form1
         TextBox2.Text = Path.GetDirectoryName(TextBox1.Text)
 
         '==============  Read from file into the dataview grid ==============
-        Label5.Visible = False
+
         Read_excel()
+        Label5.Text = ""
+        Label6.Text = ""
     End Sub
 
     Private Sub Read_excel()
@@ -170,5 +174,48 @@ Public Class Form1
         Else
             Label5.Text = "None IDW files are renamed"
         End If
+    End Sub
+    Private Sub Identical_target_names()
+        Dim target_name As String
+        Dim target_name2 As String
+        Dim double_file_cntr As Integer
+        Dim rev_(100) As Char
+
+        ProgressBar1.Value = _no_rowws
+        ProgressBar1.Visible = True
+        Me.Refresh()
+        Application.DoEvents()
+
+        For i = 0 To 50
+            rev_(i) = Chr(Asc("a") + i)
+        Next
+
+        Try
+            For row = 1 To _no_rowws
+                ProgressBar1.Value = _no_rowws - row
+                target_name = DataGridView1.Rows.Item(row).Cells(3).Value
+                double_file_cntr = 0
+                For roww = 1 To _no_rowws
+                    target_name2 = DataGridView1.Rows.Item(roww).Cells(3).Value
+                    If String.Equals(target_name, target_name2) Then
+                        double_file_cntr += 1
+                        If double_file_cntr > 49 Then MessageBox.Show("Somthing went wrong 'double_file_cntr > 49' ")
+                        If (double_file_cntr > 1) Then
+                            DataGridView1.Rows.Item(roww).Cells(3).Value = target_name2 & "_" & rev_(double_file_cntr - 2)
+                            DataGridView1.Rows.Item(roww).Cells(3).Style.BackColor = Color.Yellow
+                        End If
+                    End If
+
+                Next
+            Next
+            ProgressBar1.Visible = False
+            Label6.Text = "Done, see the datagrid look for yellow cells"
+        Catch ex As Exception
+            MessageBox.Show("Renaming section" & ex.Message)
+        End Try
+    End Sub
+
+    Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click
+        Identical_target_names()
     End Sub
 End Class
