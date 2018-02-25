@@ -1,4 +1,5 @@
-﻿Imports System.IO
+﻿Imports System.ComponentModel
+Imports System.IO
 Imports System.Text
 Imports System.Text.RegularExpressions
 Imports Excel = Microsoft.Office.Interop.Excel
@@ -35,7 +36,6 @@ Public Class Form1
         Dim xlWorkBook As Excel.Workbook
         Dim xlWorkSheet As Excel.Worksheet
 
-
         If File.Exists(TextBox1.Text) = True Then
             Try
                 xlApp = New Excel.ApplicationClass
@@ -46,6 +46,7 @@ Public Class Form1
 
                 'Read the excel file
                 _no_rowws = xlWorkSheet.UsedRange.Rows.Count
+                Button1.Text = "2) Read Excel File " & _no_rowws.ToString & " Elements"
                 ProgressBar1.Maximum = _no_rowws
                 ProgressBar1.Value = _no_rowws
                 ProgressBar1.Visible = True
@@ -79,6 +80,7 @@ Public Class Form1
     End Sub
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         Read_excel()
+        DataGridView1.Sort(DataGridView1.Columns(3), ListSortDirection.Ascending)
     End Sub
 
     Private Sub ReleaseObject(ByVal obj As Object)
@@ -179,14 +181,16 @@ Public Class Form1
         Dim target_name As String
         Dim target_name2 As String
         Dim double_file_cntr As Integer
-        Dim rev_(100) As Char
+        Dim rev_(26) As Char    'alphabet
+        Dim a, b, c As Integer
 
         ProgressBar1.Value = _no_rowws
         ProgressBar1.Visible = True
         Me.Refresh()
         Application.DoEvents()
 
-        For i = 0 To 50
+        ' Fill the array
+        For i = 0 To 26
             rev_(i) = Chr(Asc("a") + i)
         Next
 
@@ -194,14 +198,19 @@ Public Class Form1
             For row = 1 To _no_rowws
                 ProgressBar1.Value = _no_rowws - row
                 target_name = DataGridView1.Rows.Item(row).Cells(3).Value
-                double_file_cntr = 0
+                double_file_cntr = -2
                 For roww = 1 To _no_rowws
                     target_name2 = DataGridView1.Rows.Item(roww).Cells(3).Value
                     If String.Equals(target_name, target_name2) Then
                         double_file_cntr += 1
-                        If double_file_cntr > 49 Then MessageBox.Show("Somthing went wrong 'double_file_cntr > 49' ")
-                        If (double_file_cntr > 1) Then
-                            DataGridView1.Rows.Item(roww).Cells(3).Value = target_name2 & "_" & rev_(double_file_cntr - 2)
+
+                        If (double_file_cntr > -1) Then
+                            If double_file_cntr > 15645 Then MessageBox.Show("Error > 15624 identical files ")
+                            a = Math.Floor(double_file_cntr / 625)
+                            b = Math.Floor(double_file_cntr / 25)
+                            c = double_file_cntr Mod 25 'Modulus
+
+                            DataGridView1.Rows.Item(roww).Cells(3).Value = target_name2 & "_" & rev_(a) & rev_(b) & rev_(c)
                             DataGridView1.Rows.Item(roww).Cells(3).Style.BackColor = Color.Yellow
                         End If
                     End If
